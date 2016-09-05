@@ -1,0 +1,3 @@
+rootProject.name = 'watchd'
+
+include ':app'
