@@ -61,6 +61,7 @@ class TabBar extends Component {
   }
 
   /**
+   * Render.
    *
    * @return a JSX Element
    */

@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigatorIOS, StyleSheet } from 'react-native';
 
 type NavigatorType = {
-  title: string,
-  component: Object
+  title:string,
+  component:Object
 }
 
 /**
