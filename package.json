@@ -6,20 +6,20 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "15.2.1",
-    "react-native": "0.31.0"
+    "react": "15.3.1-rc.2",
+    "react-native": "0.34.0-rc.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",
     "babel-plugin-module-resolver": "^2.1.1",
     "babel-plugin-syntax-flow": "^6.13.0",
-    "babel-plugin-transform-flow-strip-types": "^6.8.0",
+    "babel-plugin-transform-flow-strip-types": "6.8.0",
     "babel-plugin-typecheck": "^3.9.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-flowtype": "^2.25.0",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.1.0",
-    "eslint-plugin-react": "^6.1.2"
+    "eslint-plugin-react": "^6.7.1"
   }
 }

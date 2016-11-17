@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
 /**
+ * <Profile />
  *
+ * @return {JSXElement}
  */
 class Profile extends Component {
+
+  /**
+   * Render.
+   *
+   * @return {JSXElement}
+   */
   render () {
     return (
       <View style={ styles.container }>
