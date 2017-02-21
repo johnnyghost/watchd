@@ -33,14 +33,16 @@ class SearchMoviesContainer extends Component {
     }
     return this.props.movies.map((data) => {
       console.log(data);
-      console.log(`https://image.tmdb.org/t/p/w500/${data.poster_path}`);
       return (
-        <View key={data.id}>
+        <View key={data.id} style={{marginLeft: 20, marginRight: 20, flex:1, flexDirection: 'row', height: 120, alignItems: 'center', borderBottomWidth: 1, borderColor: '#F1F1F1'}}>
           <Image
-            style={{height: 400}}
+            style={{height: 100, width: 60, borderRadius: 4}}
             source={{uri: `https://image.tmdb.org/t/p/w500/${data.poster_path}`}}
           />
-        <Text style={{height: 50, fontFamily: 'Avenir'}} >{data.original_title}</Text>
+        <View  style={{paddingLeft: 20}}>
+            <Text style={{fontFamily: 'Avenir'}} >{data.original_title}</Text>
+            <Text style={{fontWeight: 'bold', fontFamily: 'Avenir'}} >{data.vote_average}</Text>
+          </View>
         </View>
       ) 
     })
@@ -51,7 +53,7 @@ class SearchMoviesContainer extends Component {
    */
   render():Object {
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor: '#FAFAFA', paddingTop: 20}}>
         {this.renderMovies()}
       </ScrollView>
     )
