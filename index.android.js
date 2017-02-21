@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import Watchd from 'components/Root';
-
-AppRegistry.registerComponent('watchd', ():Object => Watchd);
+import { Root } from './app/components/';
+console.log('aa');
+AppRegistry.registerComponent('watchd', () => Root);

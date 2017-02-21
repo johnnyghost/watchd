@@ -1,0 +1,1 @@
+export TMDBClient from './TMDBClient';
