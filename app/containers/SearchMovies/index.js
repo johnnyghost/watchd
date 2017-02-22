@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { moviesActionCreators }  from 'store/actions/';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { getMovies } from 'store/selectors/movies';
+import { TextInput } from 'components';
+import MovieList from './components/MovieList';
 /**
  * Repos list container type
  * @type {Object}
@@ -17,47 +20,24 @@ type SearchMoviesContainerType = {
  *
  * @return {Object} the sideBar container
  */
-class SearchMoviesContainer extends Component {
-  props: SearchMoviesContainerType;
-
+const SearchMoviesContainer = ({
+  movies,
+  moviesActions
+}) => {
   /**
-   * Component will mount
+   * On Search handler
+   * @param {String} movie The movie to search for
    */
-  componentWillMount() {
-    this.props.moviesActions.searchMoviesRequest();
+  const onSearchHandler = (movie:string) => {
+    moviesActions.searchMovie(movie);
   }
-  
-  renderMovies() {
-    if(!this.props.movies.length) {
-      return null;
-    }
-    return this.props.movies.map((data) => {
-      console.log(data);
-      return (
-        <View key={data.id} style={{marginLeft: 20, marginRight: 20, flex:1, flexDirection: 'row', height: 120, alignItems: 'center', borderBottomWidth: 1, borderColor: '#F1F1F1'}}>
-          <Image
-            style={{height: 100, width: 60, borderRadius: 4}}
-            source={{uri: `https://image.tmdb.org/t/p/w500/${data.poster_path}`}}
-          />
-        <View  style={{paddingLeft: 20}}>
-            <Text style={{fontFamily: 'Avenir'}} >{data.original_title}</Text>
-            <Text style={{fontWeight: 'bold', fontFamily: 'Avenir'}} >{data.vote_average}</Text>
-          </View>
-        </View>
-      ) 
-    })
-  }
-  /**
-   * Render.
-   * @return {Object}
-   */
-  render():Object {
-    return (
-      <ScrollView style={{backgroundColor: '#FAFAFA', paddingTop: 20}}>
-        {this.renderMovies()}
-      </ScrollView>
-    )
-  }
+    
+  return (
+    <ScrollView style={{backgroundColor: '#FAFAFA', paddingTop: 20}}>
+      <TextInput onChangeText={onSearchHandler.bind(this)}/>
+      <MovieList movies={movies}/>
+    </ScrollView>
+  )
 }
 
 /**
@@ -69,7 +49,7 @@ class SearchMoviesContainer extends Component {
  * @return {Object} and returns an object to be passed as props
  */
 const mapStateToProps = (state:Object):Object => ({
-  movies: state.movies.list
+  movies: getMovies(state)
 });
 
 /**

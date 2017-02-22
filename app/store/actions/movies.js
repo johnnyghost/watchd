@@ -1,12 +1,8 @@
 import MOVIES_CONSTANTS from 'store/constants/movies';
 
-type FetchReposRequestType = {
+type ActionType = {
   type: string;
-}
-
-type FetchReposSuccessType = {
-  type: string;
-  payload: ?any;
+  payload?: ?any;
 }
 
 /**
@@ -17,8 +13,11 @@ type FetchReposSuccessType = {
  *
  * @return {Object}
  */
-export const searchMoviesRequest = ():FetchReposRequestType => ({
-  type: MOVIES_CONSTANTS.SEARCH_MOVIES_REQUEST
+export const searchMovie = (query: string):ActionType => ({
+  type: MOVIES_CONSTANTS.SEARCH_MOVIES_REQUEST,
+  payload: {
+    query
+  }
 })
 
 /**
@@ -31,7 +30,7 @@ export const searchMoviesRequest = ():FetchReposRequestType => ({
  *
  * @return {Object}
  */
-export const searchMoviesSuccess = (movies:Array):FetchReposSuccessType => ({
+export const searchMoviesSuccess = (movies:Array):ActionType => ({
   type: MOVIES_CONSTANTS.SEARCH_MOVIES_SUCCESS,
   payload: movies
 })

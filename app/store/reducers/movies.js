@@ -22,7 +22,7 @@ const initialState = {
  */
 const searchMoviesSuccess = (state:Object, data:Object):Object => ({
   ...state,
-  list: data.results,
+  list: data.results || [],
   isLoading: false
 });
 
