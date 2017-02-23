@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,8 +6,9 @@ import { moviesActionCreators }  from 'store/actions/';
 import { getMovies } from 'store/selectors/movies';
 import { TextInput } from 'components';
 import MovieList from './components/MovieList';
+
 /**
- * Repos list container type
+ * Search movies container type
  * @type {Object}
  */
 type SearchMoviesContainerType = {
@@ -23,7 +24,7 @@ type SearchMoviesContainerType = {
 const SearchMoviesContainer = ({
   movies,
   moviesActions
-}) => {
+}:SearchMoviesContainerType):Object => {
   /**
    * On Search handler
    * @param {String} movie The movie to search for
@@ -33,8 +34,11 @@ const SearchMoviesContainer = ({
   }
     
   return (
-    <ScrollView style={{backgroundColor: '#FAFAFA', paddingTop: 20}}>
-      <TextInput onChangeText={onSearchHandler.bind(this)}/>
+    <ScrollView>
+      <TextInput 
+        placeholder="Search for a movie"
+        onChangeText={onSearchHandler.bind(this)}
+      />
       <MovieList movies={movies}/>
     </ScrollView>
   )

@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import moviesReducer from './movies';
-console.log(moviesReducer);
+import navigatorReducer from './navigator';
 /**
  * Combine all reducers.
  */
 const appReducer = combineReducers({
-  movies: moviesReducer
+  movies: moviesReducer,
+  navigator: navigatorReducer
 });
 
 /**

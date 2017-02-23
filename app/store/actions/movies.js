@@ -11,6 +11,7 @@ type ActionType = {
  * @method searchMoviesRequest
  * @public
  *
+ * @param {String} query The query to seach for
  * @return {Object}
  */
 export const searchMovie = (query: string):ActionType => ({
