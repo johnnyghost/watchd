@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, StyleSheet } from 'react-native';
 
-const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500/';
+const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w150/';
 
 /**
  * <Poster />

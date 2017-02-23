@@ -1,6 +1,6 @@
 import React from 'react'
 import TabNavigator from 'react-native-tab-navigator';
-import { Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 type NavigatorType = {
   routes: Array<Object>,
@@ -46,9 +46,10 @@ const Navigator = ({
         key={route.title}
         selected={selected === route.title}
         onPress={onPressHandler.bind(null, route.title)}
-        renderIcon={() => <Image style={{width: 30, height: 30}} source={require('assets/images/icons/diamond.png')} />}
-        selectedTitleStyle={{fontFamily: 'Avenir'}}
-        selectedTitleStyle={{color: '#B284FF'}}
+        renderIcon={() => <Image source={route.icon} />}
+        renderSelectedIcon={() => <Image source={route.iconSelected} />}
+        titleStyle={styles.title}
+        selectedTitleStyle={styles.titleSelected}
         {...route}
       >
         <Component />
@@ -57,12 +58,28 @@ const Navigator = ({
   }
   return (
     <TabNavigator 
-      tabBarStyle={{backgroundColor: '#f1f1f1'}}
-      sceneStyle={{backgroundColor: '#FAFAFA', paddingTop: 40}}
+      tabBarStyle={styles.tabBar}
+      sceneStyle={styles.scene}
     >
       {routes.map((route) => renderItem(route))}
     </TabNavigator>
   )
 }
 
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: '#f1f1f1'
+  },
+  scene: {
+    backgroundColor: '#FAFAFA', 
+    paddingTop: 40
+  },
+  title: {
+    fontFamily: 'Avenir', 
+    color: '#36434D'
+  },
+  titleSelected: {
+    color: '#B284FF'
+  }
+})
 export default Navigator
