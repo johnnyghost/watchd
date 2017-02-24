@@ -2,10 +2,15 @@ import React from 'react'
 import { View } from 'react-native';
 import MovieListItem from './MovieListItem';
 
+type ListViewType = {
+  movies: Object,
+  onSelectedMovie: Function
+}
+
 const ListView = ({
   movies,
-  ...props
-}) => {
+  onSelectedMovie
+}:ListViewType) => {
   
   /**
    * Render Movies.
@@ -21,7 +26,8 @@ const ListView = ({
     return movies.map((data:Object):Object => {
       return <MovieListItem 
         key={data.id}
-        movie={data} 
+        movie={data}
+        onSelectedItem={onSelectedMovie}
       />
     })
   }

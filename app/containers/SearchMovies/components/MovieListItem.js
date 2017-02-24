@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Tags, Poster } from 'components'
 
 type MovieListType = {
-  movie: Object
+  movie: Object,
+  onSelectedItem: Function
 }
 
 /**
@@ -15,10 +16,12 @@ type MovieListType = {
  */
 const MovieListItem = ({
   movie,
+  onSelectedItem
 }:MovieListType) => {
   
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity onPress={onSelectedItem}>
+      <View style={styles.wrapper}>
         <Poster path={movie.poster_path} />
         <View style={styles.detailsWrapper}>
           <Text style={styles.title}>
@@ -33,7 +36,8 @@ const MovieListItem = ({
             : null
           }
         </View>
-    </View>
+      </View>
+    </TouchableOpacity>
   )
 }
 

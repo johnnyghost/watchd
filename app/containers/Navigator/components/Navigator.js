@@ -45,11 +45,12 @@ const WtNavigator = ({
    * @return {JSXElement}
    */
   const renderNavigationBar = (sceneProps:Object) => {
+
     const renderTitle = () => {
       return (
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitleText}>
-            {sceneProps.navigationState.selected.toUpperCase()}
+            {sceneProps.scene.route.showNavBar && sceneProps.scene.route.title.toUpperCase()}
           </Text>
         </View>
       )

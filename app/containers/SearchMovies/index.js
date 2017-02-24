@@ -13,7 +13,8 @@ import MovieList from './components/MovieList';
  */
 type SearchMoviesContainerType = {
   moviesActions: Object,
-  movies: Array<Object>
+  movies: Array<Object>,
+  push: Function
 };
 
 /**
@@ -23,8 +24,10 @@ type SearchMoviesContainerType = {
  */
 const SearchMoviesContainer = ({
   movies,
-  moviesActions
+  moviesActions,
+  push
 }:SearchMoviesContainerType):Object => {
+  
   /**
    * On Search handler
    * @param {String} movie The movie to search for
@@ -32,13 +35,26 @@ const SearchMoviesContainer = ({
   const onSearchHandler = (movie:string) => {
     moviesActions.searchMovie(movie);
   }
+  
+  /**
+   * On Select movie.
+   * 
+   * @method onSelectedMovieHandler
+   */
+  const onSelectedMovieHandler = () => {
+    push('movieDetails')
+  }
+  
   return (
     <ScrollView>
       <TextInput 
         placeholder="Search for a movie"
         onChangeText={onSearchHandler.bind(this)}
       />
-    <MovieList movies={movies} />
+    <MovieList 
+      movies={movies} 
+      onSelectedMovie={onSelectedMovieHandler}
+    />
     </ScrollView>
   )
 }
