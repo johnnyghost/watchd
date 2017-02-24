@@ -32,14 +32,13 @@ const SearchMoviesContainer = ({
   const onSearchHandler = (movie:string) => {
     moviesActions.searchMovie(movie);
   }
-    
   return (
     <ScrollView>
       <TextInput 
         placeholder="Search for a movie"
         onChangeText={onSearchHandler.bind(this)}
       />
-      <MovieList movies={movies}/>
+    <MovieList movies={movies} />
     </ScrollView>
   )
 }

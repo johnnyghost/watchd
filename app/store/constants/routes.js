@@ -1,24 +1,23 @@
 import SearchMovies from './../../containers/SearchMovies';
+import React from 'react';
+import { Text } from 'react-native';
 
-const routes = [
-  {
+const routes = {
+  search: {
+    key: 'search',
     title: 'search',
-    Component: SearchMovies,
-    icon: require('assets/images/icons/search.png'),
-    iconSelected: require('assets/images/icons/search-selected.png')
+    component: SearchMovies
   },
-  {
+  trending: {
+    key: 'trending',
     title: 'trending',
-    Component: SearchMovies,
-    icon: require('assets/images/icons/star.png'),
-    iconSelected: require('assets/images/icons/star-selected.png')
+    component: () => (<Text>trending</Text>)
   },
-  {
+  watchlist: {
+    key: 'watchlist',
     title: 'watchlist',
-    Component: SearchMovies,
-    icon: require('assets/images/icons/preview.png'),
-    iconSelected: require('assets/images/icons/preview-selected.png')
+    component: () => (<Text>watchlist</Text>)
   }
-]
+}
 
 export default routes;

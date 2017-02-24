@@ -3,7 +3,8 @@ import { View } from 'react-native';
 import MovieListItem from './MovieListItem';
 
 const ListView = ({
-  movies
+  movies,
+  ...props
 }) => {
   
   /**

@@ -1,21 +1,29 @@
-import React from 'react'
+import React from 'react';
+import tabs from 'store/constants/tabs';
 import TabNavigator from 'react-native-tab-navigator';
-import { Image, StyleSheet } from 'react-native';
+import { Image, View, Text, NavigationExperimental, StyleSheet } from 'react-native';
+
+const { CardStack, Header } = NavigationExperimental;
 
 type NavigatorType = {
-  routes: Array<Object>,
   selected: string,
-  selectTab: Function
+  selectTab: Function,
+  navigator:Object,
+  push: Function,
+  pop: Function
 }
+
 /**
- * <Navigator />
+ * <WtNavigator />
  *
  * @return {JSXElement}
  */
-const Navigator = ({
-  routes,
+const WtNavigator = ({
+  navigator,
   selected,
-  selectTab
+  selectTab,
+  push,
+  pop
 }:NavigatorType) => {
 
   /**
@@ -24,8 +32,57 @@ const Navigator = ({
    * @method onPressHandler
    * @param {String} title The title of the selected tab
    */
-  const onPressHandler = (title) => {
+  const onPressHandler = (title:string) => {
     selectTab(title);
+  }
+  
+  /**
+   * Render Navigation bar.
+   * 
+   * @method renderNavigationBar
+   *
+   * @param  {Object} sceneProps The scene props
+   * @return {JSXElement}
+   */
+  const renderNavigationBar = (sceneProps:Object) => {
+    const renderTitle = () => {
+      return (
+        <View style={styles.headerTitleContainer}>
+          <Text style={styles.headerTitleText}>
+            {sceneProps.navigationState.selected.toUpperCase()}
+          </Text>
+        </View>
+      )
+    }
+    
+    return (
+     <Header
+       onNavigateBack={pop}
+       style={styles.navigationBar}
+       renderTitleComponent={renderTitle}
+       {...sceneProps}
+     />
+    );
+  }
+
+  /**
+   * Render scene.
+   * 
+   * @method renderScene
+   * @param  {[type]}    sceneProps [description]
+   * @return {[type]}               [description]
+   */
+  const renderScene = (sceneProps:Object) => {
+    const route = sceneProps.scene.route;
+    return (
+      <View style={styles.scene}>
+        <route.component
+          push={push}
+          pop={pop}
+          {...route.props}
+        /> 
+      </View>
+    );
   }
   
   /**
@@ -37,9 +94,6 @@ const Navigator = ({
    * @return {JSXElement}
    */
   const renderItem = (route:Object) => {
-    const {
-      Component
-    } = route;
     
     return (
       <TabNavigator.Item
@@ -52,27 +106,27 @@ const Navigator = ({
         selectedTitleStyle={styles.titleSelected}
         {...route}
       >
-        <Component />
+        <CardStack
+         onNavigateBack={pop}
+         navigationState={navigator}
+         renderScene={renderScene}
+         renderHeader={renderNavigationBar}
+        />
       </TabNavigator.Item>
     )
   }
   return (
-    <TabNavigator 
-      tabBarStyle={styles.tabBar}
-      sceneStyle={styles.scene}
-    >
-      {routes.map((route) => renderItem(route))}
+    <TabNavigator >
+      {Object.keys(tabs).map((tab) => renderItem(tabs[tab]))}
     </TabNavigator>
   )
 }
 
 const styles = StyleSheet.create({
-  tabBar: {
-    backgroundColor: '#f1f1f1'
-  },
   scene: {
-    backgroundColor: '#FAFAFA', 
-    paddingTop: 40
+    flex: 1,
+    paddingTop: 20,
+    backgroundColor: '#FAFAFA',
   },
   title: {
     fontFamily: 'Avenir', 
@@ -80,6 +134,20 @@ const styles = StyleSheet.create({
   },
   titleSelected: {
     color: '#B284FF'
+  },
+  navigationBar: {
+    backgroundColor: '#FAFAFA'
+  },
+  headerTitleContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerTitleText: {
+    color: '#B284FF',
+    fontFamily: 'Avenir-Black'
   }
 })
-export default Navigator
+
+export default WtNavigator

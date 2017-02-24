@@ -2,7 +2,9 @@ import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { Tags, Poster } from 'components'
 
-
+type MovieListType = {
+  movie: Object
+}
 
 /**
  * <MovieListItem />
@@ -12,28 +14,32 @@ import { Tags, Poster } from 'components'
  * @return {JSXElement}
  */
 const MovieListItem = ({
-  movie
-}) => {
+  movie,
+}:MovieListType) => {
   
   return (
     <View style={styles.wrapper}>
-      <Poster path={movie.poster_path} />
-      <View style={styles.detailsWrapper}>
-        <Text style={styles.title}>
-          {movie.original_title}
-        </Text>
-        <Tags tags={movie.genres}/>
-        <Text style={styles.rating}>
-          {movie.vote_average}
-        </Text>
-      </View>
+        <Poster path={movie.poster_path} />
+        <View style={styles.detailsWrapper}>
+          <Text style={styles.title}>
+            {movie.original_title}
+          </Text>
+          <Tags tags={movie.genres}/>
+          <Text style={styles.rating}>
+            {movie.vote_average}
+          </Text>
+          {movie.vote_average > 6 ? 
+            <Image style={styles.likedIcon} source={require('assets/images/icons/heart-fill.png')} />
+            : null
+          }
+        </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginLeft: 20, 
+    marginLeft: 15, 
     marginRight: 20, 
     flex:1, 
     flexDirection: 'row', 
@@ -55,6 +61,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#8d9aa6',
     fontFamily: 'Avenir'
+  },
+  likedIcon: {
+    height: 10, 
+    width:10, marginTop:4 
   }
 });
 

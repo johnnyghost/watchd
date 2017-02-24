@@ -1,5 +1,4 @@
-import { put, call } from 'redux-saga/effects';
-import { takeLatest } from 'redux-saga';
+import { put, call, takeLatest } from 'redux-saga/effects';
 import { TMDBClient } from 'core/clients'
 import MOVIES_CONSTANTS from 'store/constants/movies';
 
@@ -7,7 +6,6 @@ import MOVIES_CONSTANTS from 'store/constants/movies';
  * Search movies.
  */
 function *searchMovies({payload}):void {
-  
   try {
     const movies = yield call(TMDBClient.search, payload.query);
     yield put({ type: MOVIES_CONSTANTS.SEARCH_MOVIES_SUCCESS, payload: movies });
@@ -20,5 +18,5 @@ function *searchMovies({payload}):void {
  * Watch fetch repos saga.
  */
 export function* watchSearchMovies():void {
-  yield* takeLatest(MOVIES_CONSTANTS.SEARCH_MOVIES_REQUEST, searchMovies);
+  yield takeLatest(MOVIES_CONSTANTS.SEARCH_MOVIES_REQUEST, searchMovies);
 }

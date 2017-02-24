@@ -14,6 +14,7 @@ import Navigator from './components/Navigator';
 const mapStateToProps = (state):Object => {
   
   return {
+    navigator: state.navigator,
     routes: state.navigator.routes,
     selected: state.navigator.selected
   }
@@ -29,7 +30,9 @@ const mapStateToProps = (state):Object => {
  * @return {Object}
  */
 const mapDispatchToProps = (dispatch:Function):Object => ({
-  selectTab : bindActionCreators(navigatorActionCreators.selectTab, dispatch)
+  selectTab: bindActionCreators(navigatorActionCreators.selectTab, dispatch),
+  push: bindActionCreators(navigatorActionCreators.push, dispatch),
+  pop: bindActionCreators(navigatorActionCreators.pop, dispatch)
 });
 
 export default connect(
