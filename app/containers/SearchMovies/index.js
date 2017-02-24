@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { moviesActionCreators }  from 'store/actions/';
 import { getMovies } from 'store/selectors/movies';
-import { TextInput } from 'components';
+import { TextInput, Screen } from 'components';
 import MovieList from './components/MovieList';
 
 /**
@@ -46,16 +46,18 @@ const SearchMoviesContainer = ({
   }
   
   return (
-    <ScrollView keyboardShouldPersistTaps="always">
-      <TextInput 
-        placeholder="Search for a movie"
-        onChangeText={onSearchHandler.bind(this)}
-      />
-    <MovieList 
-      movies={movies} 
-      onSelectedMovie={onSelectedMovieHandler}
-    />
-    </ScrollView>
+    <Screen>
+      <ScrollView keyboardShouldPersistTaps="always">
+        <TextInput 
+          placeholder="Search for a movie"
+          onChangeText={onSearchHandler.bind(this)}
+        />
+        <MovieList 
+          movies={movies} 
+          onSelectedMovie={onSelectedMovieHandler}
+        />
+      </ScrollView>
+    </Screen>
   )
 }
 

@@ -43,8 +43,6 @@ const MovieListItem = ({
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginLeft: 15, 
-    marginRight: 20, 
     flex:1, 
     flexDirection: 'row', 
     height: 120, 

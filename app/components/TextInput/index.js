@@ -22,9 +22,7 @@ const WtTextInput = ({
 const styles = StyleSheet.create({
   textInput: {
     height: 40, 
-    backgroundColor: 'white', 
-    marginLeft: 15,
-    marginRight: 15, 
+    backgroundColor: 'white',  
     paddingLeft: 15,
     fontFamily: 'Avenir-Light'
   }
