@@ -46,7 +46,7 @@ const SearchMoviesContainer = ({
   }
   
   return (
-    <ScrollView>
+    <ScrollView keyboardShouldPersistTaps="always">
       <TextInput 
         placeholder="Search for a movie"
         onChangeText={onSearchHandler.bind(this)}
