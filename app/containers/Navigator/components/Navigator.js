@@ -108,10 +108,10 @@ const WtNavigator = ({
         {...route}
       >
         <CardStack
-         onNavigateBack={pop}
-         navigationState={navigator}
-         renderScene={renderScene}
-         renderHeader={renderNavigationBar}
+          onNavigateBack={pop}
+          navigationState={navigator}
+          renderScene={renderScene}
+          renderHeader={renderNavigationBar}
         />
       </TabNavigator.Item>
     )
