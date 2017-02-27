@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import debounce from 'lodash/debounce';
 import { moviesActionCreators }  from 'store/actions/';
 import { getMovies } from 'store/selectors/movies';
 import { TextInput, Screen } from 'components';
@@ -13,6 +14,7 @@ import MovieList from './components/MovieList';
  */
 type SearchMoviesContainerType = {
   moviesActions: Object,
+  isLoading: bool,
   movies: Array<Object>,
   push: Function
 };
@@ -24,6 +26,7 @@ type SearchMoviesContainerType = {
  */
 const SearchMoviesContainer = ({
   movies,
+  isLoading,
   moviesActions,
   push
 }:SearchMoviesContainerType):Object => {
@@ -47,19 +50,27 @@ const SearchMoviesContainer = ({
   
   return (
     <Screen>
-      <ScrollView keyboardShouldPersistTaps="always">
-        <TextInput 
-          placeholder="Search for a movie"
-          onChangeText={onSearchHandler.bind(this)}
-        />
-        <MovieList 
-          movies={movies} 
+      <TextInput 
+        placeholder="Search for a movie"
+        onChangeText={debounce(onSearchHandler.bind(this), 500)}
+      />
+      <View style={styles.movieListWrapper}>
+        <MovieList
+          movies={movies}
+          isLoading={isLoading}
           onSelectedMovie={onSelectedMovieHandler}
         />
-      </ScrollView>
+      </View>
     </Screen>
   )
 }
+
+const styles = StyleSheet.create({
+  movieListWrapper: {
+    flex: 1,
+    marginTop: 10
+  }
+})
 
 /**
  * Will subscribe to Redux store updates
@@ -70,7 +81,8 @@ const SearchMoviesContainer = ({
  * @return {Object} and returns an object to be passed as props
  */
 const mapStateToProps = (state:Object):Object => ({
-  movies: getMovies(state)
+  movies: getMovies(state),
+  isLoading: state.movies.isLoading
 });
 
 /**

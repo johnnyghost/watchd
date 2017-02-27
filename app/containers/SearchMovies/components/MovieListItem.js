@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
   },
   likedIcon: {
     height: 10, 
-    width:10, marginTop:4 
+    width:10, 
+    marginTop:4 
   }
 });
 

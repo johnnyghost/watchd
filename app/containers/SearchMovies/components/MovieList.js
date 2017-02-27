@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { ListView } from 'react-native';
 import MovieListItem from './MovieListItem';
+import withLoading from 'hoc/withLoading';
 
 type MovieListType = {
   movies: Object,
+  isLoading: Bool,
   onSelectedMovie: Function
 }
 
@@ -65,13 +67,13 @@ class MovieList extends Component {
   render ():Object {
     return (
       <ListView
-       enableEmptySections
-       keyboardShouldPersistTaps="always"
-       dataSource={this.state.dataSource}
-       renderRow={this.renderRow}
+        enableEmptySections
+        keyboardShouldPersistTaps="always"
+        dataSource={this.state.dataSource}
+        renderRow={this.renderRow}
       />
     );
   }
 }
 
-export default MovieList;
+export default withLoading(MovieList);
